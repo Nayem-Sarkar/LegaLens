@@ -1,0 +1,48 @@
+{
+  "document": "test.txt",
+  "overall_risk": "Red",
+  "summary": {
+    "total": 6,
+    "red": 2,
+    "yellow": 4,
+    "green": 0
+  },
+  "findings": [
+    {
+      "risk_level": "Yellow",
+      "issue": "Implicit acceptance of terms through continued service usage, bypassing explicit consent.",
+      "evidence": "Actually using the Services. In this case, you understand and agree that Zomato will treat your use of the Services as acceptance of the Terms from that point onwards.",
+      "fix": "Require explicit click-through acceptance for initial agreement and any material updates to the Terms, ensuring users provide clear, affirmative consent."
+    },
+    {
+      "risk_level": "Yellow",
+      "issue": "Very broad definition of 'Content' and 'Your content' includes sensitive personal data such as location data and private communications, implying extensive data processing.",
+      "evidence": "\"Content\" will include (but is not limited to) reviews, images, photos, audio, video, location data, nearby places, and all other forms of information or data. \"Your content\" or \"Customer Content\" means content that you upload, share or transmit to, through or in connection with the Services, such as likes, ratings, reviews, images, photos, messages, chat communication, profile information, or any other materials that you publicly display or displayed in your account profile.",
+      "fix": "Clearly and granularly specify the exact types of data collected, the precise purposes for each data type, how it is processed and shared, and offer users granular control and opt-out mechanisms, especially for sensitive data."
+    },
+    {
+      "risk_level": "Red",
+      "issue": "Zomato can unilaterally change terms at any time, requiring users to constantly monitor for changes and forcing acceptance through continued use without explicit consent.",
+      "evidence": "Zomato may vary or amend or change or update these Terms, from time to time entirely at its own discretion. You shall be responsible for checking these Terms from time to time and ensure continued compliance with these Terms. Your use of Zomato Platform after any such amendment or change in the Terms shall be deemed as your express acceptance to such amended/changed terms and you also agree to be bound by such changed/amended Terms.",
+      "fix": "Require Zomato to provide clear, proactive notice of material changes to the Terms (e.g., via email or in-app notification) and obtain active, explicit consent from users, or provide a clear option to opt-out or terminate service without penalty if terms are not accepted."
+    },
+    {
+      "risk_level": "Red",
+      "issue": "Zomato reserves the right to suspend, cancel, discontinue, or modify services and content at any time without prior notice, impacting user reliability and expectations.",
+      "evidence": "Zomato reserves the right to suspend/cancel, or discontinue any or all products or services at any time without notice, make modifications and alterations in any or all of its contents, products and services contained on the site without any prior notice.",
+      "fix": "Zomato should commit to providing reasonable prior notice (e.g., 30 days) for any suspension, cancellation, or discontinuation of services, especially for changes that significantly impact user functionality or access to content, except in cases of immediate security risk."
+    },
+    {
+      "risk_level": "Yellow",
+      "issue": "Users are broadly obligated to comply with all laws, and agree not to violate Zomato's or third-parties' 'legal rights' without those rights being clearly defined or limited, creating potential for overly broad interpretation.",
+      "evidence": "You are in compliance with all laws and regulations in the country in which you live when you access and use the Services. You agree to use the Services only in compliance with these Terms and applicable law, and in a manner that does not violate our legal rights or those of any third party(ies).",
+      "fix": "Clarify and define the scope of 'our legal rights' and 'third party(ies) legal rights' to prevent vague or overly broad interpretations that could unfairly disadvantage users. Provide examples of prohibited actions."
+    },
+    {
+      "risk_level": "Yellow",
+      "issue": "The service may automatically push software updates and upgrades, potentially without explicit user consent or easily accessible controls, which could introduce unwanted changes or new terms.",
+      "evidence": "Unless your device, its settings, or computer software does not permit transmission or use of upgrades or updates, you agree that we, or the applicable software or software application store, may provide notice to you of the availability of such upgrades or updates and automatically push such u",
+      "fix": "Ensure users have clear and easily accessible controls to manage automatic updates, including options to review update details before installation, delay updates, or opt-out entirely, except for critical security patches that require immediate deployment."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "report_title": "LegaLens Privacy Policy Audit",
+  "document": "test.txt",
+  "overall_risk": "Green",
+  "summary": {
+    "total_flags": 0,
+    "red_count": 0,
+    "yellow_count": 0,
+    "green_count": 0
+  },
+  "findings": []
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegaLens - AI Legal Analyzer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Live Video Background -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+    
+    <header class="glass-panel main-header">
+        <div class="logo">
+             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#paint0_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="url(#paint1_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="url(#paint2_linear)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="paint0_linear" x1="2" y1="2" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#00F0FF"/>
+                        <stop offset="1" stop-color="#5B42F3"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear" x1="2" y1="17" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#00F0FF"/>
+                        <stop offset="1" stop-color="#5B42F3"/>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear" x1="2" y1="12" x2="22" y2="17" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#00F0FF"/>
+                        <stop offset="1" stop-color="#5B42F3"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h1>LegaLens</h1>
+        </div>
+        <div class="header-status">
+            <span class="pulse-indicator"></span> Ready
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Upload Section -->
+        <section class="upload-section glass-panel">
+            <div id="drop-zone" class="drop-zone">
+                <input type="file" id="file-input" accept=".txt,.pdf,.png,.jpg,.jpeg,.webp" hidden>
+                <div class="upload-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <h3>Drag & Drop your document here</h3>
+                <p>or click to browse from your computer</p>
+                <span class="supported-formats">Supports: .txt, .pdf, .png, .jpg</span>
+            </div>
+            
+            <div id="paste-zone" class="paste-zone">
+                <p style="margin: 1.5rem 0; color: var(--text-muted); font-size: 0.9rem;">— OR PASTE TEXT DIRECTLY —</p>
+                <textarea id="paste-input" class="glass-textarea" placeholder="Paste your Terms of Service or Privacy Policy here..."></textarea>
+                <button id="analyze-text-btn" class="glass-button" style="margin-top: 1rem; width: 100%;">Analyze Pasted Text</button>
+            </div>
+            
+            <div id="loading-indicator" class="loading-state hidden">
+                <div class="cyber-hud">
+                    <div class="hud-bracket left"></div>
+                    <div class="hud-bracket right"></div>
+                    
+                    <div class="hud-ring outer-dash"></div>
+                    <div class="hud-ring inner-solid"></div>
+                    <div class="hud-ring scanner-sweep"></div>
+                    <div class="hud-core">
+                        <div class="hud-target"></div>
+                    </div>
+                </div>
+                <h3 style="margin-top: 1rem; color: #00f0ff; letter-spacing: 2px;">SCANNING DATA...</h3>
+                <p>AI Neural Net is analyzing risk vectors.</p>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard" id="dashboard-section" style="display: none;">
+            <div class="glass-panel summary-card">
+                <h2>Analysis Summary</h2>
+                <div class="flex-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Document</span>
+                        <h3 id="doc-name">Loading...</h3>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Overall Risk</span>
+                        <div class="risk-badge" id="overall-badge">Checking</div>
+                    </div>
+                </div>
+                
+                <div class="risk-breakdown">
+                    <div class="breakdown-item red">
+                        <span class="count" id="count-red">0</span>
+                        <span class="label">Critical</span>
+                    </div>
+                    <div class="breakdown-item yellow">
+                        <span class="count" id="count-yellow">0</span>
+                        <span class="label">Warnings</span>
+                    </div>
+                    <div class="breakdown-item green">
+                        <span class="count" id="count-green">0</span>
+                        <span class="label">Safe</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Findings Feed -->
+            <div class="findings-container">
+                <div class="section-header">
+                    <h2>Key Findings</h2>
+                    <div class="actions">
+                        <button class="glass-button" onclick="location.reload()">Analyze Another</button>
+                    </div>
+                </div>
+                <div id="findings-list" class="findings-list">
+                    <!-- Finding cards injected here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
