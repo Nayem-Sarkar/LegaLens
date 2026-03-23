@@ -6,8 +6,7 @@ from main import process_file
 
 app = Flask(__name__, static_url_path='', static_folder='.')
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+UPLOAD_FOLDER = tempfile.gettempdir()
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'webp'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -34,6 +33,10 @@ def analyze():
         try:
             report = process_file(filepath)
             os.remove(filepath)
+            
+            if "error" in report:
+                return jsonify(report), 400
+                
             return jsonify(report)
         except Exception as e:
             if os.path.exists(filepath):
@@ -60,6 +63,9 @@ def analyze():
             # Clean up temp file
             os.remove(filepath)
             
+            if "error" in report:
+                return jsonify(report), 400
+                
             return jsonify(report)
         except Exception as e:
             if os.path.exists(filepath):

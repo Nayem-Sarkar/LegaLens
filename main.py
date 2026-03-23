@@ -167,6 +167,7 @@ def process_file(filepath: str) -> dict:
                 all_findings.extend(parsed)
         except Exception as e:
             print(f"[ERROR] Gemini Image call failed: {e}")
+            return {"error": f"Gemini API Error: {str(e)}"}
             
     else:
         if len(text) > 8000:
@@ -188,7 +189,7 @@ def process_file(filepath: str) -> dict:
                 raw = response.text if hasattr(response, "text") else None
             except Exception as e:
                 print(f"[ERROR] Gemini text call failed: {e}")
-                raw = None
+                return {"error": f"Gemini API Error: {str(e)}"}
                 
             parsed = parse_json(raw)
             if isinstance(parsed, list):
